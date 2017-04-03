@@ -32,7 +32,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/FfVjhDe.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/AeRaT8l.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/c2VgKWH.gif' title='Network error indicator' width='' alt='Video Walkthrough' />
 
 
 ## Notes
