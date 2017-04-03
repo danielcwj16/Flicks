@@ -18,6 +18,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
     let posterSmall : String = "w92"
     let posterLarge : String = "w500"
     @IBOutlet weak var movietableview: UITableView!
+    @IBOutlet weak var networkerrorview: UIView!
+    
+    @IBOutlet weak var networkerrortext: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,8 +40,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
     
     func initializeMovies(){
         refreshControl.tintColor = UIColor.white
+        refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
         refreshControl.addTarget(self, action: #selector(refreshMovies), for: UIControlEvents.valueChanged)
         movietableview.insertSubview(refreshControl, at: 0)
+        
+        self.networkerrorview.isHidden = false
+        self.movietableview.addSubview(networkerrorview)
+        self.movietableview.bringSubview(toFront: networkerrorview)
         loadMovies()
     }
     
@@ -65,8 +73,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
                         with: data, options:[]) as? NSDictionary {
                         
                     
-                        //Hide HUD once the network request come back
-                        MBProgressHUD.hide(for:self.view,animated:true)
+                        
 
                         //print("responseDictionary: \(responseDictionary)")
                         
@@ -78,11 +85,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
                         
                         // This is where you will store the returned array of posts in your posts property
                         // self.feeds = responseFieldDictionary["posts"] as! [NSDictionary]
+                        self.networkerrorview.isHidden = true
                         self.movietableview.reloadData()
                         
-                        self.refreshControl.endRefreshing()
+                        
+                    }else{
+                        self.networkerrorview.isHidden = false
                     }
                 }
+                self.refreshControl.endRefreshing()
+                
+                //Hide HUD once the network request come back
+                MBProgressHUD.hide(for:self.view,animated:true)
+                
         });
         
         task.resume()
