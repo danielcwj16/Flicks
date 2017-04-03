@@ -9,3 +9,5 @@ Features:
 * Tab Bar for swiching view
 * Pull refresh movie data
 * Display loading state when fetching data from API
+
+ ![alt tag](http://i.imgur.com/FfVjhDe.gif)
