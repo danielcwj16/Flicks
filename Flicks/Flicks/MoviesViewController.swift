@@ -44,9 +44,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
         refreshControl.addTarget(self, action: #selector(refreshMovies), for: UIControlEvents.valueChanged)
         movietableview.insertSubview(refreshControl, at: 0)
         
-        self.networkerrorview.isHidden = false
-        self.movietableview.addSubview(networkerrorview)
-        self.movietableview.bringSubview(toFront: networkerrorview)
+        self.networkerrorview.isHidden = true
+        
         loadMovies()
     }
     
@@ -89,10 +88,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
                         self.movietableview.reloadData()
                         
                         
-                    }else{
-                        self.networkerrorview.isHidden = false
                     }
+                }else{
+                    self.networkerrorview.isHidden = false
+                    self.movietableview.addSubview(self.networkerrorview)
+                    self.movietableview.bringSubview(toFront: self.networkerrorview)
                 }
+
                 self.refreshControl.endRefreshing()
                 
                 //Hide HUD once the network request come back

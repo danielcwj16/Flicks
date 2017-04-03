@@ -42,8 +42,6 @@ class TopRatedMovieTableViewController: UIViewController,UITableViewDataSource,U
         refreshControl.addTarget(self, action: #selector(refreshTopRated), for: UIControlEvents.valueChanged)
         table_view.insertSubview(refreshControl, at: 0)
         self.networkerrorview.isHidden = true
-        self.table_view.addSubview(networkerrorview)
-        self.table_view.bringSubview(toFront: networkerrorview)
         loadTopRated()
     }
     
@@ -86,6 +84,9 @@ class TopRatedMovieTableViewController: UIViewController,UITableViewDataSource,U
                 }
                 else{
                     self.networkerrorview.isHidden = false
+                    self.table_view.addSubview(self.networkerrorview)
+                    self.table_view.bringSubview(toFront: self.networkerrorview)
+
                 }
                 self.refreshControl.endRefreshing()
                 //Hide HUD once the network request come back
