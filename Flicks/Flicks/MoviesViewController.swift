@@ -36,6 +36,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource,UITableViewD
     
     
     func initializeMovies(){
+        refreshControl.tintColor = UIColor.white
         refreshControl.addTarget(self, action: #selector(refreshMovies), for: UIControlEvents.valueChanged)
         movietableview.insertSubview(refreshControl, at: 0)
         loadMovies()
